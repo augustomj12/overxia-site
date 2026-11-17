@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Overxia Solutions · Sites, sistemas e aplicativos sob medida</title>
-<meta name="description" content="Sites, sistemas e aplicativos feitos sob medida, com código próprio. Projetos no ar: RITMO e Dedelimp.">
+<meta name="description" content="Sites, sistemas e aplicativos feitos sob medida, com código próprio. Projetos: RITMO, Dedelimp, JV Logs, MapsLine, MapsLine Mobile e Carreto Fácil.">
 <meta name="theme-color" content="#050606">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23070B09'/%3E%3Cpath d='M9 8l14 16M23 8L9 24' stroke='%232BD4A0' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,7 +63,7 @@
   <div class="capitulo" id="projetos">
     <p class="rotulo"><b>01</b> Projetos</p>
     <h2 data-palavras>Saíram<br>desta linha.</h2>
-    <p class="lead">Dois endereços no ar. Role para navegar por dentro de cada um e ver como foi construído.</p>
+    <p class="lead">Seis projetos, entre sites, sistemas e aplicativos. Role para navegar por dentro de cada um e ver como foi construído.</p>
   </div>
 
   <article class="caso caso-1" id="projeto-ritmo">
@@ -102,7 +102,6 @@
         <dd><b>Banco, login e pagamento</b><span class="pendente">a confirmar</span></dd>
       </dl>
       <dl class="fatos">
-        <div class="autoria"><dt>Quem fez</dt><dd class="pendente">a confirmar</dd></div>
         <div><dt>Entrega</dt><dd>Site de vendas + aplicativo web</dd></div>
         <div><dt>Modelo</dt><dd>R$ 19,90/mês no PIX</dd></div>
         <div><dt>Resultado</dt><dd class="pendente">número em breve</dd></div>
@@ -147,7 +146,6 @@
         <dd><b>Meta Pixel com consentimento</b>A medição dos anúncios só liga depois que a pessoa aceita os cookies.</dd>
       </dl>
       <dl class="fatos">
-        <div class="autoria"><dt>Quem fez</dt><dd class="pendente">a confirmar</dd></div>
         <div><dt>Entrega</dt><dd>Página de conversão</dd></div>
         <div><dt>Região</dt><dd>Salvador e RMS</dd></div>
         <div><dt>Resultado</dt><dd class="pendente">número em breve</dd></div>
@@ -156,8 +154,186 @@
     </div>
   </article>
 
+  <article class="caso caso-3" id="projeto-jvlogs">
+    <div class="caso-tela">
+      <div class="navegador">
+        <div class="barra">
+          <span class="url"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="5" width="8" height="6" rx="1.5"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5"/></svg><b>JV Logs</b><span class="caminho" data-caminho>/ painel</span></span>
+          <span class="ok"><i></i>200 OK</span>
+        </div>
+        <div class="janela">
+          <div class="faixa" data-rotulos="painel|viagem|despesas fixas|relatórios">
+            <img src="midia/projetos/jvlogs-0.jpg" width="1440" height="900" alt="Painel do JV Logs: lucro do período com margem, receita, gastos, quilômetros rodados, distribuição de custos e evolução financeira." loading="lazy">
+            <img src="midia/projetos/jvlogs-1.jpg" width="1440" height="900" alt="Detalhe de uma viagem no JV Logs: receita, gastos, lucro, margem, lucro por quilômetro e diesel estimado." loading="lazy">
+            <img src="midia/projetos/jvlogs-2.jpg" width="1440" height="900" alt="Despesas fixas do mês no JV Logs, com o que está em aberto, o que já foi pago e o botão Pagar." loading="lazy">
+            <img src="midia/projetos/jvlogs-3.jpg" width="1440" height="900" alt="Relatório financeiro do JV Logs comparando o período com o anterior." loading="lazy">
+          </div>
+        </div>
+      </div>
+      <div class="celular"><img src="midia/projetos/jvlogs-mob.jpg" width="780" height="1688" alt="Painel do JV Logs no celular." loading="lazy"></div>
+      <div class="telas" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
+    </div>
+
+    <div class="caso-info">
+      <p class="meta"><span>Lote 03</span><span>Cliente · sistema web de gestão</span><span class="no-ar"><i></i>Em uso</span></p>
+      <h3>JV Logs</h3>
+      <p class="desc">Sistema web de gestão financeira e operacional para transportadoras, feito para substituir a planilha da operação.</p>
+      <ul class="itens">
+        <li>Lucro, margem e custo por viagem, por km, por hora e por dia</li>
+        <li>Abastecimentos e manutenções que viram despesa da viagem</li>
+        <li>Calculadora com o frete mínimo para a margem desejada</li>
+      </ul>
+      <dl class="tecnologias">
+        <dt>Tecnologias</dt>
+        <dd><b>React, TypeScript e Vite</b>Todas as telas do sistema, com TypeScript em modo estrito.</dd>
+        <dd><b>Firebase</b>Login, banco de dados e hospedagem, sem servidor próprio. As regras de acesso isolam os dados de cada empresa.</dd>
+        <dd><b>Tailwind e Recharts</b>O layout que funciona também no celular e os gráficos do painel.</dd>
+        <dd><b>Vitest</b>Mais de 200 testes. Os números reais da planilha viraram teste de regressão.</dd>
+      </dl>
+      <dl class="fatos">
+        <div><dt>Entrega</dt><dd>Sistema web, no computador e no celular</dd></div>
+        <div><dt>Acesso</dt><dd>Uma conta por empresa</dd></div>
+        <div><dt>Resultado</dt><dd class="pendente">número em breve</dd></div>
+      </dl>
+      <p class="nota">Acesso só com login: o sistema não tem cadastro público.</p>
+    </div>
+  </article>
+
+  <article class="caso caso-4 invertido" id="projeto-mapsline">
+    <div class="caso-tela tela-wide">
+      <div class="navegador">
+        <div class="barra">
+          <span class="url"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="5" width="8" height="6" rx="1.5"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5"/></svg><b>MapsLine</b><span class="caminho" data-caminho>/ mapa ao vivo</span></span>
+          <span class="ok"><i></i>200 OK</span>
+        </div>
+        <div class="janela">
+          <div class="faixa" data-rotulos="mapa ao vivo|rota em replay|posições|alertas">
+            <img src="midia/projetos/mapsline-0.jpg" width="1440" height="810" alt="Mapa ao vivo do MapsLine com veículos agrupados no mapa e a lista de veículos ao lado." loading="lazy">
+            <img src="midia/projetos/mapsline-1.jpg" width="1440" height="810" alt="Relatório de rota do MapsLine com o trajeto no mapa, o player de replay e a tabela de pontos." loading="lazy">
+            <img src="midia/projetos/mapsline-2.jpg" width="1440" height="810" alt="Relatório de posições do MapsLine com o seletor de colunas aberto e os botões de exportar PDF e Excel." loading="lazy">
+            <img src="midia/projetos/mapsline-3.jpg" width="1440" height="810" alt="Alertas e eventos do MapsLine, com o formulário de novo alerta do tipo alarme." loading="lazy">
+          </div>
+        </div>
+      </div>
+      <div class="telas" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
+    </div>
+
+    <div class="caso-info">
+      <p class="meta"><span>Lote 04</span><span>Cliente · plataforma de rastreamento</span><span class="no-ar"><i></i>Em produção</span></p>
+      <h3>MapsLine</h3>
+      <p class="desc">Interface web de uma plataforma de rastreamento de frotas: mapa ao vivo, relatórios, alertas e cadastros.</p>
+      <ul class="itens">
+        <li>Mapa em tempo real com agrupamento de veículos e modo seguir</li>
+        <li>Relatórios de viagens, paradas, eventos e rota com replay, em PDF e Excel</li>
+        <li>Alertas com aviso e som, e cercas virtuais desenhadas no mapa</li>
+      </ul>
+      <dl class="tecnologias">
+        <dt>Tecnologias</dt>
+        <dd><b>React, TypeScript e Vite</b>A interface inteira, com TypeScript em modo estrito.</dd>
+        <dd><b>MapLibre GL e Supercluster</b>O mapa ao vivo e o agrupamento de veículos próximos. Sem WebGL, entra o Leaflet.</dd>
+        <dd><b>Traccar</b>O servidor de rastreamento. O sistema não tem banco próprio e recebe as posições por uma única conexão WebSocket.</dd>
+        <dd><b>TanStack Query e PrimeReact</b>O cache dos dados do servidor e os componentes das telas.</dd>
+      </dl>
+      <dl class="fatos">
+        <div><dt>Entrega</dt><dd>Interface web da plataforma</dd></div>
+        <div><dt>Servidor</dt><dd>Traccar, open source</dd></div>
+        <div><dt>Resultado</dt><dd class="pendente">número em breve</dd></div>
+      </dl>
+      <p class="nota">Acesso só com login. Dados dos prints vêm de um servidor de testes.</p>
+    </div>
+  </article>
+
+  <article class="caso caso-5 app" id="projeto-mapsline-mobile" style="--ar: 780 / 1740; --r: .4483">
+    <div class="caso-tela">
+      <div class="navegador">
+        <div class="barra">
+          <span class="url"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="3" y="1" width="6" height="10" rx="1.5"/></svg><b>MapsLine Mobile</b><span class="caminho" data-caminho>/ início</span></span>        </div>
+        <div class="janela">
+          <div class="faixa" data-rotulos="início|mapa|veículo|comandos">
+            <img src="midia/projetos/mapsline-mobile-0.jpg" width="780" height="1740" alt="Início do aplicativo MapsLine Mobile: indicadores da frota, mapa e lista de veículos." loading="lazy">
+            <img src="midia/projetos/mapsline-mobile-1.jpg" width="780" height="1740" alt="Mapa da frota no MapsLine Mobile, com filtros de status e veículos agrupados." loading="lazy">
+            <img src="midia/projetos/mapsline-mobile-2.jpg" width="780" height="1740" alt="Detalhe de um veículo no MapsLine Mobile, com localização, telemetria e atalhos." loading="lazy">
+            <img src="midia/projetos/mapsline-mobile-3.jpg" width="780" height="1740" alt="Tela de ações e comandos do MapsLine Mobile, com o bloqueio de motor marcado como ação crítica e indisponível." loading="lazy">
+          </div>
+        </div>
+      </div>
+      <div class="celular"><img src="midia/projetos/mapsline-mobile-mob.jpg" width="780" height="1740" alt="Tela de relatórios do MapsLine Mobile." loading="lazy"></div>
+      <div class="telas" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
+    </div>
+
+    <div class="caso-info">
+      <p class="meta"><span>Lote 05</span><span>Cliente · aplicativo nativo</span><span class="no-ar dev"><i></i>Em desenvolvimento</span></p>
+      <h3>MapsLine Mobile</h3>
+      <p class="desc">Aplicativo de celular da plataforma MapsLine: frota em tempo real, alertas, relatórios e comandos ao rastreador.</p>
+      <ul class="itens">
+        <li>Mapa nativo com agrupamento de veículos e painel de telemetria</li>
+        <li>Comandos ao rastreador com confirmação; o bloqueio de motor vem desligado</li>
+        <li>Relatórios em PDF, CSV e XLSX e editor de cercas no aparelho</li>
+      </ul>
+      <dl class="tecnologias">
+        <dt>Tecnologias</dt>
+        <dd><b>React Native e Expo</b>Um só código para Android e iOS, com as rotas organizadas por arquivo.</dd>
+        <dd><b>react-native-maps</b>Google Maps no Android e Apple Maps no iOS, com os veículos próximos agrupados.</dd>
+        <dd><b>TanStack Query e Zustand</b>Os dados do servidor e o estado da frota ao vivo, com uma única conexão WebSocket.</dd>
+        <dd><b>Vitest</b>49 casos de teste nas regras puras e no contrato com o servidor.</dd>
+      </dl>
+      <dl class="fatos">
+        <div><dt>Entrega</dt><dd>Aplicativo Android e iOS</dd></div>
+        <div><dt>Estágio</dt><dd>Fora das lojas ainda</dd></div>
+        <div><dt>Resultado</dt><dd class="pendente">ainda não publicado</dd></div>
+      </dl>
+      <p class="nota">Prints do emulador Android, ligado a um servidor de testes.</p>
+    </div>
+  </article>
+
+  <article class="caso caso-6 invertido app" id="projeto-carreto-facil" style="--ar: 739 / 1600; --r: .4619">
+    <div class="caso-tela">
+      <div class="navegador">
+        <div class="barra">
+          <span class="url"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="3" y="1" width="6" height="10" rx="1.5"/></svg><b>Carreto Fácil</b><span class="caminho" data-caminho>/ explorar</span></span>        </div>
+        <div class="janela">
+          <div class="faixa" data-rotulos="explorar|motoristas online|cartão do motorista|minha assinatura">
+            <img src="midia/projetos/carreto-facil-0.jpg" width="739" height="1600" alt="Aba Explorar do Carreto Fácil: mapa de Salvador com o botão Ficar online." loading="lazy">
+            <img src="midia/projetos/carreto-facil-1.jpg" width="739" height="1600" alt="Mapa do Carreto Fácil afastado, com motoristas online de várias categorias de veículo." loading="lazy">
+            <img src="midia/projetos/carreto-facil-2.jpg" width="739" height="1600" alt="Cartão do motorista no Carreto Fácil: veículo, CNH mascarada, validade, fotos e botão Ligar." loading="lazy">
+            <img src="midia/projetos/carreto-facil-3.jpg" width="739" height="1600" alt="Tela Minha assinatura do Carreto Fácil: plano ativo, vencimento e lista de planos." loading="lazy">
+          </div>
+        </div>
+      </div>
+      <div class="celular"><img src="midia/projetos/carreto-facil-mob.jpg" width="739" height="1600" alt="Tela de entrada do Carreto Fácil." loading="lazy"></div>
+      <div class="telas" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
+    </div>
+
+    <div class="caso-info">
+      <p class="meta"><span>Lote 06</span><span>Cliente · aplicativo nas lojas</span><span class="no-ar"><i></i>Nas lojas</span></p>
+      <h3>Carreto Fácil</h3>
+      <p class="desc">Aplicativo que mostra no mapa os motoristas de carreto online e deixa o cliente ligar direto para o motorista.</p>
+      <ul class="itens">
+        <li>Mapa com motoristas online e filtro por tipo de veículo</li>
+        <li>Cadastro do motorista em passos, com CNH, fotos e rascunho salvo</li>
+        <li>Assinatura do motorista paga pelo Mercado Pago</li>
+      </ul>
+      <dl class="tecnologias">
+        <dt>Tecnologias</dt>
+        <dd><b>React Native e Expo</b>O aplicativo de Android e iOS, com mapas nativos e as rotas organizadas por arquivo.</dd>
+        <dd><b>Mercado Pago</b>O checkout da assinatura. O app consulta o status do pagamento a cada 10 segundos.</dd>
+        <dd><b>Ruby on Rails e PostgreSQL</b>A API e o painel de aprovação de motoristas, que já eram do contratante. O app só consome.</dd>
+      </dl>
+      <dl class="fatos">
+        <div><dt>Entrega</dt><dd>Aplicativo Android e iOS</dd></div>
+        <div><dt>Escopo</dt><dd>Finalizar e publicar</dd></div>
+        <div><dt>Resultado</dt><dd>Publicado nas duas lojas</dd></div>
+      </dl>
+      <p class="nota">O design é do contratante.</p>
+      <div class="links">
+        <a class="link" href="https://play.google.com/store/apps/details?id=com.carretofacilonline.carretofacilon&amp;hl=pt_BR" target="_blank" rel="noopener">Google Play <span aria-hidden="true">↗</span></a>
+        <a class="link" href="https://apps.apple.com/br/app/carreto-f%C3%A1cil/id6797602477" target="_blank" rel="noopener">App Store <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </article>
+
   <a class="proximo" href="#contato">
-    <span class="guia-mini">Lote 03 · destino: <b data-cliente-dominio>seunegocio.com.br</b></span>
+    <span class="guia-mini">Lote 07 · destino: <b data-cliente-dominio>seunegocio.com.br</b></span>
     <strong>O próximo lote pode ser o seu.</strong>
     <span class="btn btn-verde">Abrir ordem <span aria-hidden="true">→</span></span>
   </a>
@@ -290,7 +466,7 @@
     <img src="midia/fabrica/m0-960.jpg" width="960" height="540" alt="" loading="lazy">
   </div>
   <div class="rodape-linha">
-    <span><i class="ponto"></i>Linha funcionando · 2 no ar</span>
+    <span><i class="ponto"></i>Linha funcionando · 6 projetos</span>
     <span>Hora local <b data-hora>--:--</b></span>
     <span class="rodape-links">GitHub · LinkedIn · Perfil técnico <i class="pendente">em breve</i></span>
     <span>© 2026 Overxia Solutions</span>

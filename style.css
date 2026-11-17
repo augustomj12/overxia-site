@@ -202,7 +202,6 @@ h1 em { font-style: normal; color: var(--luz); }
 .tecnologias b { font-family: var(--mono); font-weight: 500; font-size: .76rem; color: var(--creme); letter-spacing: .02em; }
 .fatos { display: grid; grid-template-columns: repeat(3, minmax(0, auto)); justify-content: start; gap: .2rem 2.2rem; padding-top: 4px; }
 .fatos div { display: grid; gap: 2px; }
-.fatos .autoria { grid-column: 1 / -1; }
 .fatos dt { font-family: var(--mono); font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--suave); }
 .fatos dd { font-size: .9rem; }
 .link {
@@ -225,6 +224,29 @@ h1 em { font-style: normal; color: var(--luz); }
   .barra { height: 32px; font-size: .62rem; }
   .ok { display: none; }
 }
+
+/* ---------- Variantes de projeto ----------
+   .tela-wide  capturas em 16:9 (1440 × 810), sem cortar o print original
+   .app        aplicativo de celular: um aparelho no centro que rola pelas telas;
+               --ar é a proporção da captura e --r é largura ÷ altura (definidos no HTML)
+   .no-ar.dev  selo âmbar para projeto ainda em desenvolvimento
+   .nota       linha de observação (acesso restrito, origem dos dados dos prints...)
+   .links      mais de um link de saída (lojas de aplicativos) */
+.tela-wide .janela, .tela-wide .faixa img { aspect-ratio: 16 / 9; }
+
+.caso.app { --wn: min(300px, 80vw); }
+@media (min-width: 960px) { .caso.app { --wn: min(300px, calc((100svh - 250px) * var(--r))); } }
+.caso.app .caso-tela { display: grid; justify-items: center; }
+.caso.app .navegador { width: var(--wn); }
+.caso.app .janela, .caso.app .faixa img { aspect-ratio: var(--ar); }
+.caso.app .telas { width: var(--wn); margin: 14px 0 0; }
+.caso.app .celular { right: auto; left: calc(50% + var(--wn) / 2 + 20px); width: min(22%, 170px); aspect-ratio: var(--ar); }
+@media (max-width: 959px) { .caso.app .celular { display: none; } }
+
+.no-ar.dev { color: var(--ambar); border-color: rgba(240, 166, 58, .45); }
+.no-ar.dev i, .no-ar.dev i::after { background: var(--ambar); }
+.nota { font-family: var(--mono); font-size: .72rem; letter-spacing: .02em; color: var(--suave); max-width: 32rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0 1.6rem; }
 
 .casos { background: var(--palco); padding-bottom: clamp(48px, 8vw, 110px); }
 .proximo {

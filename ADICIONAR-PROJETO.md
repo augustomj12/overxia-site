@@ -38,7 +38,6 @@ Os caminhos abaixo partem da raiz do repositório (onde está o `index.html`). S
 Nome do projeto:
 Endereço (domínio, sem https):
 Tipo (ex.: Cliente · página de vendas / Produto próprio · SaaS):
-Quem fez (Augusto, sócio ou os dois, e o que cada um fez):
 
 Descrição (uma frase, até ~140 caracteres):
 
@@ -69,22 +68,18 @@ Nome de cada captura, para o caminho do navegador (4 itens, ex.: início | probl
 ## 2. Coloque os arquivos no lugar
 
 1. As 5 imagens vão em `midia/projetos/`.
-2. No `index.html`, procure o bloco do último projeto (comentário `SEGUNDO PROJETO`, a partir de `<article class="caso caso-2 invertido" id="projeto-dedelimp">` até o `</article>` dele).
-3. Copie o bloco inteiro e cole logo depois dele, antes do `<a class="proximo"`.
+2. No `index.html`, procure o bloco do último projeto (hoje `<article class="caso caso-6 invertido app" id="projeto-carreto-facil">`, até o `</article>` dele). Para um **site com endereço público**, copie o da Dedelimp (`caso-2`); para um **sistema sem endereço público**, o do JV Logs (`caso-3`); para um **aplicativo de celular**, o do Carreto Fácil (`caso-6`). Veja a seção 2.1.
+3. Cole a cópia logo depois do último projeto, antes do `<a class="proximo"`.
 4. No bloco novo, troque:
-   - `caso-2` pelo número do projeto (`caso-3`, `caso-4`...);
-   - `invertido`: **projetos pares têm**, **ímpares não têm** (o navegador alterna de lado). O 3 fica sem `invertido`; o 4, com;
-   - `id="projeto-dedelimp"` por `id="projeto-<nome>"`;
-   - os dois `dedelimp.com.br` (na barra e no link) pelo domínio novo;
+   - o número do `caso-N` pelo do projeto (`caso-7`, `caso-8`...);
+   - `invertido`: **projetos pares têm**, **ímpares não têm** (o navegador alterna de lado). O 7 fica sem `invertido`; o 8, com;
+   - `id="projeto-<nome>"` pelo nome do projeto novo;
+   - os dois domínios (na barra e no link) pelo domínio novo;
    - `data-rotulos="..."` pelos 4 nomes das capturas, separados por `|`;
    - as 4 imagens e o `alt` de cada uma (o `alt` descreve a tela, ex.: "Página inicial da Clínica Aurora");
    - a imagem do celular e o `alt` dela;
    - `Lote 02` pelo número do lote;
-   - tipo, nome (`<h3>`), descrição, os 3 itens, as tecnologias, os fatos e o link;
-   - **"Quem fez"**, que é o primeiro fato da ficha. Para recrutador, é o campo mais importante:
-     ```html
-     <div class="autoria"><dt>Quem fez</dt><dd>Nome: o que fez · Nome: o que fez</dd></div>
-     ```
+   - tipo, nome (`<h3>`), descrição, os 3 itens, as tecnologias, os fatos e o link (a ficha não tem "Quem fez" nem número de commits);
    - se o código do projeto estiver num repositório **público**, um segundo link logo depois do "Visitar…":
      ```html
      <a class="link" href="https://github.com/usuario/repositorio" target="_blank" rel="noopener">Ver o código <span aria-hidden="true">↗</span></a>
@@ -99,6 +94,22 @@ O que ainda não está confirmado:
 <dd><b>Banco, login e pagamento</b><span class="pendente">a confirmar</span></dd>
 ```
 
+### 2.1 Variantes do bloco
+
+O bloco base é o do navegador com 4 capturas 1440 × 900 e o celular ao lado. Há três variações, todas já prontas no `style.css`:
+
+| Caso | O que fazer |
+|---|---|
+| **Capturas em 16:9** (ex.: 1920 × 1080, como o MapsLine) | Reduza para **1440 × 810** (não corte) e ponha a classe `tela-wide` no `<div class="caso-tela">`. |
+| **Sem captura de celular** (sistema só para computador) | Apague o `<div class="celular">`. O `main.js` já trata a falta dele. |
+| **Aplicativo de celular** (só tem prints de celular) | Use o bloco do Carreto Fácil ou do MapsLine Mobile: `class="caso caso-N app"` e `style="--ar: LARGURA / ALTURA; --r: LARGURA ÷ ALTURA"` no `<article>` (ex.: `--ar: 739 / 1600; --r: .4619`). As 4 telas rolam dentro de um aparelho no centro e o `-mob.jpg` fica ao lado. Mantenha o tamanho original do print e salve em JPG. |
+
+Outros ajustes:
+- **Sem endereço público** (sistema com login, projeto de cliente fechado): na barra, escreva o nome do projeto no lugar do domínio, **não invente um endereço**, apague o link "Visitar" e use `<p class="nota">Acesso só com login.</p>`.
+- **Mais de um link** (lojas de aplicativo): coloque os links dentro de `<div class="links">`.
+- **Ainda em desenvolvimento**: o selo fica `<span class="no-ar dev"><i></i>Em desenvolvimento</span>` (âmbar). Use "Em uso", "Em produção" ou "Nas lojas" só quando for verdade.
+- **Dado de terceiro nos prints** (rosto, nome, e-mail, telefone, CPF, placa): borre antes de salvar e confirme a autorização do cliente.
+
 ## 3. Rode o validador (ele acerta os números sozinho)
 
 Na pasta do site, no terminal:
@@ -107,8 +118,8 @@ node validar.js --corrigir
 ```
 
 Ele faz duas coisas:
-- **acerta sozinho os números que dependem da quantidade de projetos**: o "Lote" do cartão do fim, a frase "Dois endereços no ar.", o "2 no ar" do rodapé e a lista "Projetos no ar: …" da descrição para o Google;
-- **confere o projeto novo** e, se tiver algo fora do padrão, diz exatamente o que corrigir: classe e número do caso, `invertido` nos pares, id, nome, domínio igual na barra e no link, quantidade de telas igual à de nomes e de barrinhas, tamanho exato das imagens (1440 × 900 e 780 × 1688), peso das imagens, `alt`, "Lote", tecnologias no formato certo, "Quem fez" e arquivos que não existem.
+- **acerta sozinho os números que dependem da quantidade de projetos**: o "Lote" do cartão do fim, a frase "Seis projetos, entre sites, sistemas e aplicativos.", o "6 projetos" do rodapé e a lista "Projetos: …" da descrição para o Google;
+- **confere o projeto novo** e, se tiver algo fora do padrão, diz exatamente o que corrigir: classe e número do caso, `invertido` nos pares, id, nome, domínio igual na barra e no link (quando a barra mostra um domínio), quantidade de telas igual à de nomes e de barrinhas, tamanho das imagens (1440 × 900; 1440 × 810 com `tela-wide`; o do print com `app`; 780 × 1688 no celular), peso das imagens, `alt`, "Lote", tecnologias no formato certo e arquivos que não existem.
 
 Rode de novo até aparecer **"Tudo certo. Pode publicar."**
 

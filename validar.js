@@ -63,10 +63,12 @@ function confereImagem(onde, src, alt, w, h) {
 }
 
 /* ---------- os projetos ---------- */
-const reCaso = /<article class="caso caso-(\d+)( invertido)?" id="([^"]+)">([\s\S]*?)\n\s*<\/article>/g;
+/* <article class="caso caso-N[ invertido][ app]" id="projeto-nome"[ style="--ar: L / A; --r: .xxxx"]>
+   " app" = aplicativo de celular (só prints de celular). O style só é usado nele. */
+const reCaso = /<article class="caso caso-(\d+)( invertido)?( app)?" id="([^"]+)"([^>]*)>([\s\S]*?)\n\s*<\/article>/g;
 const casos = [];
 let m;
-while ((m = reCaso.exec(html))) casos.push({ n: +m[1], invertido: !!m[2], id: m[3], corpo: m[4] });
+while ((m = reCaso.exec(html))) casos.push({ n: +m[1], invertido: !!m[2], app: !!m[3], id: m[4], attrs: m[5], corpo: m[6] });
 const soltos = (html.match(/<article class="caso[ "]/g) || []).length;
 if (soltos !== casos.length) erro('Projetos', `achei ${soltos} blocos <article class="caso…"> mas só ${casos.length} no formato certo: <article class="caso caso-N" id="projeto-nome"> (com " invertido" nos pares)`);
 if (!casos.length) erro('Projetos', 'nenhum projeto encontrado');
@@ -85,15 +87,27 @@ casos.forEach((c, i) => {
   ids.add(c.id);
   if (!nome) erro(onde, 'falta o nome do projeto no <h3>');
 
-  // barra do navegador e link
+  // barra do navegador e link (o link é opcional: sistema com login e app de loja não têm "Visitar")
   const dominio = texto((c.corpo.match(/<span class="url">[\s\S]*?<b>([^<]+)<\/b>/) || [])[1] || '');
   const link = c.corpo.match(/<a class="link" href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/);
-  if (!dominio) erro(onde, 'falta o domínio na barra do navegador (<span class="url">…<b>dominio.com.br</b>)');
-  if (!link) erro(onde, 'falta o link "Visitar …" (<a class="link" …>)');
-  else {
+  if (!dominio) erro(onde, 'falta o nome na barra do navegador (<span class="url">…<b>dominio.com.br</b>, ou o nome do projeto se não houver endereço público)');
+  const ehDominio = /^[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(dominio);
+  if (link) {
     if (!/^https:\/\//.test(link[1])) erro(onde, `o link "${link[1]}" precisa começar com https://`);
-    if (dominio && !link[1].includes(dominio)) erro(onde, `a barra mostra ${dominio}, mas o link vai para ${link[1]}`);
-    if (dominio && !texto(link[2]).toLowerCase().includes(dominio.toLowerCase())) aviso(onde, `o texto do link não cita ${dominio}`);
+    if (ehDominio && !c.corpo.includes(`href="https://${dominio}`)) erro(onde, `a barra mostra ${dominio}, mas o link vai para ${link[1]}`);
+    if (ehDominio && !texto(link[2]).toLowerCase().includes(dominio.toLowerCase())) aviso(onde, `o texto do link não cita ${dominio}`);
+  } else if (ehDominio) erro(onde, `a barra mostra o endereço ${dominio}, mas falta o link "Visitar …" (<a class="link" …>)`);
+
+  // tamanho das capturas: 1440 × 900 (padrão), 1440 × 810 (tela-wide, 16:9) ou o do print do aparelho (app)
+  const wide = /class="caso-tela tela-wide"/.test(c.corpo);
+  let tela = [1440, wide ? 810 : 900], celTam = [780, 1688];
+  if (c.app) {
+    const ar = c.attrs.match(/--ar:\s*(\d+)\s*\/\s*(\d+)/), r = c.attrs.match(/--r:\s*([\d.]+)/);
+    if (!ar || !r) erro(onde, 'aplicativo: faltam no <article> o style="--ar: LARGURA / ALTURA; --r: LARGURA ÷ ALTURA" (ex.: --ar: 739 / 1600; --r: .4619)');
+    else {
+      tela = celTam = [+ar[1], +ar[2]];
+      if (Math.abs(+r[1] - tela[0] / tela[1]) > 0.002) erro(onde, `--r deveria ser ${(tela[0] / tela[1]).toFixed(4)} (largura ÷ altura de ${tela[0]} / ${tela[1]})`);
+    }
   }
 
   // telas do navegador
@@ -104,13 +118,14 @@ casos.forEach((c, i) => {
     const imgs = [...faixa[2].matchAll(/<img\b([^>]*)>/g)].map(x => ({ src: (x[1].match(/src="([^"]+)"/) || [])[1], alt: (x[1].match(/alt="([^"]*)"/) || [])[1] }));
     if (imgs.length < 3 || imgs.length > 6) erro(onde, `${imgs.length} telas na faixa; use de 3 a 6 (o padrão é 4)`);
     if (rotulos.length !== imgs.length) erro(onde, `${imgs.length} telas, mas ${rotulos.length} nomes em data-rotulos (um nome por tela, separados por |)`);
-    imgs.forEach(im => confereImagem(onde, im.src, im.alt, 1440, 900));
+    imgs.forEach(im => confereImagem(onde, im.src, im.alt, tela[0], tela[1]));
     const barras = ((c.corpo.match(/<div class="telas"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || '').match(/<span>/g) || [];
     if (barras.length !== imgs.length) erro(onde, `${imgs.length} telas, mas ${barras.length} barrinhas em <div class="telas"> (uma <span><i></i></span> por tela)`);
   }
+  // celular: opcional em sistema só para computador (sem print de celular)
   const cel = c.corpo.match(/<div class="celular"><img\b([^>]*)>/);
-  if (!cel) erro(onde, 'falta a imagem do celular (<div class="celular"><img …>)');
-  else confereImagem(onde, (cel[1].match(/src="([^"]+)"/) || [])[1], (cel[1].match(/alt="([^"]*)"/) || [])[1], 780, 1688);
+  if (!cel) aviso(onde, 'sem imagem do celular (tudo bem se o sistema não tem versão para celular ou não há print)');
+  else confereImagem(onde, (cel[1].match(/src="([^"]+)"/) || [])[1], (cel[1].match(/alt="([^"]*)"/) || [])[1], celTam[0], celTam[1]);
 
   // ficha
   const lote = (c.corpo.match(/<p class="meta"><span>Lote (\d+)<\/span>/) || [])[1];
@@ -125,20 +140,19 @@ casos.forEach((c, i) => {
   const tecs = [...tec.matchAll(/<dd>([\s\S]*?)<\/dd>/g)];
   if (!tecs.length) erro(onde, 'falta a lista de tecnologias (<dl class="tecnologias">…<dd><b>Nome</b>explicação</dd>)');
   tecs.forEach(t => { if (!/^<b>[^<]+<\/b>\S/.test(t[1].trim())) erro(onde, `tecnologia fora do formato <dd><b>Nome</b>Uma linha de explicação.</dd>: "${texto(t[1]).slice(0, 40)}"`); });
-  if (!/<div class="autoria"><dt>Quem fez<\/dt>/.test(c.corpo)) erro(onde, 'falta o "Quem fez" na ficha (<div class="autoria"><dt>Quem fez</dt><dd>…</dd></div>)');
 });
 
 /* ---------- textos que dependem da quantidade de projetos ---------- */
 const k = casos.length;
 const extenso = ['Nenhum', 'Um', 'Dois', 'Três', 'Quatro', 'Cinco', 'Seis', 'Sete', 'Oito', 'Nove', 'Dez', 'Onze', 'Doze'][k] || String(k);
-const frase = k === 1 ? 'Um endereço no ar.' : `${extenso} endereços no ar.`;
+const frase = `${extenso} projeto${k === 1 ? '' : 's'}, entre sites, sistemas e aplicativos.`;
 const nomes = casos.map(c => c.nome).filter(Boolean);
 const lista = nomes.length > 1 ? nomes.slice(0, -1).join(', ') + ' e ' + nomes[nomes.length - 1] : (nomes[0] || '');
 const regras = [
-  { nome: 'Frase dos projetos', re: /(<div class="capitulo" id="projetos">[\s\S]*?<p class="lead">)([^<.]*? (?:endereço|endereços) no ar\.)()/, certo: frase },
+  { nome: 'Frase dos projetos', re: /(<div class="capitulo" id="projetos">[\s\S]*?<p class="lead">)([A-Za-zÀ-ú]+ projetos?, entre sites, sistemas e aplicativos\.)()/, certo: frase },
   { nome: 'Cartão "O próximo lote"', re: /(<span class="guia-mini">Lote )(\d+)( · destino)/, certo: dois(k + 1) },
-  { nome: 'Rodapé', re: /(Linha funcionando · )(\d+)( no ar)/, certo: String(k) },
-  { nome: 'Descrição para o Google', re: /(<meta name="description" content="[^"]*Projetos no ar: )([^"]*?)(\.")/, certo: lista },
+  { nome: 'Rodapé', re: /(Linha funcionando · )(\d+ projetos?)()/, certo: `${k} projeto${k === 1 ? '' : 's'}` },
+  { nome: 'Descrição para o Google', re: /(<meta name="description" content="[^"]*Projetos: )([^"]*?)(\.")/, certo: lista },
 ];
 regras.forEach(r => {
   const achou = html.match(r.re);

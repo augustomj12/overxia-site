@@ -218,7 +218,8 @@
     gsap.fromTo($('.navegador', c),
       { y: -150, autoAlpha: 0, rotationX: 14, transformPerspective: 1600 },
       { y: 0, autoAlpha: 1, rotationX: 0, duration: 1.25, ease: 'power3.out', scrollTrigger: st });
-    gsap.fromTo($('.celular', c), { y: 70, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, ease: 'power3.out', delay: .45, scrollTrigger: st });
+    const cel = $('.celular', c); // nem todo projeto tem captura de celular (ex.: sistema só para desktop)
+    if (cel) gsap.fromTo(cel, { y: 70, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, ease: 'power3.out', delay: .45, scrollTrigger: st });
     gsap.fromTo($$('.caso-info > *', c), { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .7, ease: 'power2.out', stagger: .06, delay: .25, scrollTrigger: st });
   }
 
