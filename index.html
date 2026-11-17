@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overxia Solutions · Sites, sistemas e aplicativos sob medida</title>
+<meta name="description" content="Sites, sistemas e aplicativos feitos sob medida, com código próprio. Projetos no ar: RITMO e Dedelimp.">
+<meta name="theme-color" content="#050606">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23070B09'/%3E%3Cpath d='M9 8l14 16M23 8L9 24' stroke='%232BD4A0' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<header class="topo">
+  <a class="marca" href="#topo" aria-label="Overxia Solutions, início">
+    <span class="marca-nome">OVER<i>X</i>IA</span>
+    <span class="marca-sub">Solutions</span>
+  </a>
+  <nav class="menu" aria-label="Seções">
+    <a href="#projetos">Projetos</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#quem">Quem somos</a>
+  </nav>
+  <a class="btn btn-verde" href="#contato">Fale com a gente</a>
+</header>
+
+<main id="topo">
+
+<!-- ============ ABERTURA: a fábrica em operação (seção comum, sem scroll preso) ============ -->
+<section class="cena" aria-label="Abertura">
+  <div class="palco">
+
+    <div class="fabrica" data-video="midia/fabrica/l0.mp4">
+      <img src="midia/fabrica/m0.jpg" width="1920" height="1080" alt="Maquete de uma fábrica em miniatura em operação: recebimento, montagem com dois braços robóticos, antena, sala de controle de vidro e expedição, ligados por uma esteira.">
+    </div>
+
+    <div class="abertura">
+      <p class="rotulo"><i class="x">X</i> Sites · Sistemas · Aplicativos</p>
+      <h1>Sua ideia,<br>em <em>produção</em>.</h1>
+      <p class="lead">Sites, sistemas e aplicativos feitos sob medida, com código próprio. Do seu primeiro áudio ao endereço no ar.</p>
+      <form class="pedido" id="pedido" autocomplete="off">
+        <label for="negocio">Qual é o seu negócio?</label>
+        <div class="pedido-linha">
+          <input id="negocio" name="negocio" type="text" maxlength="28" placeholder="Ex.: Clínica Aurora">
+          <button class="btn btn-verde" type="submit">Abrir ordem <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+      <p class="rolar" aria-hidden="true"><i></i>Role para ver o que sai desta linha</p>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- ============ PROJETOS: em cada caso, a tela desce até o lugar e depois rola pelas telas do site ============ -->
+<section class="casos" aria-label="Projetos">
+  <div class="capitulo" id="projetos">
+    <p class="rotulo"><b>01</b> Projetos</p>
+    <h2>Saíram<br>desta linha.</h2>
+    <p class="lead">Dois endereços no ar. Role para navegar por dentro de cada um e ver como foi construído.</p>
+  </div>
+
+  <article class="caso caso-1" id="projeto-ritmo">
+    <div class="caso-tela">
+      <div class="navegador">
+        <div class="barra">
+          <span class="url"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="5" width="8" height="6" rx="1.5"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5"/></svg><b>ritmoplan.com.br</b><span class="caminho" data-caminho>/ início</span></span>
+          <span class="ok"><i></i>200 OK</span>
+        </div>
+        <div class="janela">
+          <div class="faixa" data-rotulos="início|ciclos de estudo|revisões|painel">
+            <img src="midia/projetos/ritmo-0.jpg" width="1440" height="900" alt="Página inicial do RITMO: Estudar com ritmo. Não no improviso.">
+            <img src="midia/projetos/ritmo-1.jpg" width="1440" height="900" alt="Seção de ciclos inteligentes de estudo do RITMO." loading="lazy">
+            <img src="midia/projetos/ritmo-2.jpg" width="1440" height="900" alt="Seção de revisões espaçadas do RITMO." loading="lazy">
+            <img src="midia/projetos/ritmo-3.jpg" width="1440" height="900" alt="Seção do painel de desempenho do RITMO." loading="lazy">
+          </div>
+        </div>
+      </div>
+      <div class="celular"><img src="midia/projetos/ritmo-mob.jpg" width="780" height="1688" alt="RITMO no celular." loading="lazy"></div>
+      <div class="telas" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
+    </div>
+
+    <div class="caso-info">
+      <p class="meta"><span>Lote 01</span><span>Produto próprio · SaaS</span><span class="no-ar"><i></i>No ar</span></p>
+      <h3>RITMO</h3>
+      <p class="desc">Planejador de estudos por assinatura para quem estuda para concurso, ENEM e vestibular.</p>
+      <ul class="itens">
+        <li>Ciclos de estudo que se redistribuem a cada sessão</li>
+        <li>Revisões espaçadas pela curva do esquecimento</li>
+        <li>Painel com horas, ranking de matérias e pontos fracos</li>
+      </ul>
+      <dl class="tecnologias">
+        <dt>Tecnologias</dt>
+        <dd><b>HTML, CSS, JavaScript e GSAP</b>O site de vendas, sem framework, com as animações ligadas ao scroll.</dd>
+        <dd><b>Vite e Tailwind</b>O aplicativo web é compilado com Vite e estilizado com Tailwind.</dd>
+        <dd><b>Banco, login e pagamento</b><span class="pendente">a confirmar</span></dd>
+      </dl>
+      <dl class="fatos">
+        <div class="autoria"><dt>Quem fez</dt><dd class="pendente">a confirmar</dd></div>
+        <div><dt>Entrega</dt><dd>Site de vendas + aplicativo web</dd></div>
+        <div><dt>Modelo</dt><dd>R$ 19,90/mês no PIX</dd></div>
+        <div><dt>Resultado</dt><dd class="pendente">número em breve</dd></div>
+      </dl>
+      <a class="link" href="https://ritmoplan.com.br" target="_blank" rel="noopener">Visitar ritmoplan.com.br <span aria-hidden="true">↗</span></a>
+    </div>
+  </article>
+
+  <article class="caso caso-2 invertido" id="projeto-dedelimp">
+    <div class="caso-tela">
+      <div class="navegador">
+        <div class="barra">
+          <span class="url"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="5" width="8" height="6" rx="1.5"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5"/></svg><b>dedelimp.com.br</b><span class="caminho" data-caminho>/ início</span></span>
+          <span class="ok"><i></i>200 OK</span>
+        </div>
+        <div class="janela">
+          <div class="faixa" data-rotulos="início|problemas|orçamento em 3 toques|quem atendemos">
+            <img src="midia/projetos/dedelimp-0.jpg" width="1440" height="900" alt="Página inicial da Dedelimp: Dedetizadora em Salvador." loading="lazy">
+            <img src="midia/projetos/dedelimp-1.jpg" width="1440" height="900" alt="Seção Qual é o seu problema hoje, com cartões de baratas, ratos e escorpiões." loading="lazy">
+            <img src="midia/projetos/dedelimp-2.jpg" width="1440" height="900" alt="Orçamento grátis em 3 toques da Dedelimp." loading="lazy">
+            <img src="midia/projetos/dedelimp-3.jpg" width="1440" height="900" alt="Seção Do apartamento ao galpão: casa, condomínio e empresa." loading="lazy">
+          </div>
+        </div>
+      </div>
+      <div class="celular"><img src="midia/projetos/dedelimp-mob.jpg" width="780" height="1688" alt="Dedelimp no celular." loading="lazy"></div>
+      <div class="telas" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
+    </div>
+
+    <div class="caso-info">
+      <p class="meta"><span>Lote 02</span><span>Cliente · página de vendas</span><span class="no-ar"><i></i>No ar</span></p>
+      <h3>Dedelimp</h3>
+      <p class="desc">Página de vendas de uma dedetizadora de Salvador, feita para receber tráfego pago e virar conversa no WhatsApp.</p>
+      <ul class="itens">
+        <li>Orçamento em 3 toques que chega montado no WhatsApp</li>
+        <li>Caminhos próprios para casa, condomínio e empresa</li>
+        <li>WhatsApp fixo no celular e consentimento de cookies</li>
+      </ul>
+      <dl class="tecnologias">
+        <dt>Tecnologias</dt>
+        <dd><b>HTML, CSS e JavaScript puro</b>Página leve, sem framework, feita para receber o clique do anúncio.</dd>
+        <dd><b>Vercel</b>Publicação com cabeçalhos de segurança (CSP) configurados no projeto.</dd>
+        <dd><b>Meta Pixel com consentimento</b>A medição dos anúncios só liga depois que a pessoa aceita os cookies.</dd>
+      </dl>
+      <dl class="fatos">
+        <div class="autoria"><dt>Quem fez</dt><dd class="pendente">a confirmar</dd></div>
+        <div><dt>Entrega</dt><dd>Página de conversão</dd></div>
+        <div><dt>Região</dt><dd>Salvador e RMS</dd></div>
+        <div><dt>Resultado</dt><dd class="pendente">número em breve</dd></div>
+      </dl>
+      <a class="link" href="https://dedelimp.com.br" target="_blank" rel="noopener">Visitar dedelimp.com.br <span aria-hidden="true">↗</span></a>
+    </div>
+  </article>
+
+  <a class="proximo" href="#contato">
+    <span class="guia-mini">Lote 03 · destino: <b data-cliente-dominio>seunegocio.com.br</b></span>
+    <strong>O próximo lote pode ser o seu.</strong>
+    <span class="btn btn-verde">Abrir ordem <span aria-hidden="true">→</span></span>
+  </a>
+</section>
+
+<!-- ============ SERVIÇOS: as três frentes ============ -->
+<section class="servicos" id="servicos">
+  <div class="cabeca">
+    <p class="rotulo"><b>02</b> Serviços</p>
+    <h2>Três frentes,<br>um só time.</h2>
+    <p class="lead">O mesmo time que constrói o sistema cuida da operação que mantém tudo rodando e, quando faz sentido, da campanha que leva gente até ele.</p>
+  </div>
+  <div class="frentes">
+    <article class="frente">
+      <p class="rotulo">Construir · desenvolvimento</p>
+      <h3>A gente monta peça por peça.</h3>
+      <p>Sites, sistemas de gestão e aplicativos sob medida. Cada etapa chega com um link para você testar.</p>
+      <ul class="itens">
+        <li>Sites e páginas de vendas</li>
+        <li>Sistemas web de gestão</li>
+        <li>Aplicativos</li>
+        <li>Produtos por assinatura</li>
+      </ul>
+    </article>
+    <article class="frente">
+      <p class="rotulo">Manter · soluções tecnológicas</p>
+      <h3>Depois, ninguém some.</h3>
+      <p>Automação, integrações e suporte para a operação não parar.</p>
+      <ul class="itens">
+        <li>Automação de tarefas</li>
+        <li>Integração entre sistemas</li>
+        <li>Hospedagem e domínio</li>
+        <li>Suporte e manutenção</li>
+      </ul>
+    </article>
+    <article class="frente">
+      <p class="rotulo">Atrair · tráfego pago</p>
+      <h3>E leva gente até lá.</h3>
+      <p>Campanhas no Instagram e no Facebook, com o custo de cada contato medido.</p>
+      <ul class="itens">
+        <li>Planejamento de campanha</li>
+        <li>Página feita para o anúncio</li>
+        <li>Contato direto no WhatsApp</li>
+        <li>Relatório de custo por contato</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- ============ QUEM SOMOS ============ -->
+<section class="quem" id="quem">
+  <div class="quem-texto">
+    <p class="rotulo"><b>03</b> Quem somos</p>
+    <h2>Você fala direto com quem constrói.</h2>
+    <p class="lead">Somos dois sócios. Não tem atendimento no meio: quem responde a mensagem é quem escreve o código. Cada entrega tem escopo, prazo e resultado combinados antes de começar.</p>
+    <ul class="compromissos">
+      <li><b>Sem intermediário</b>Quem responde a mensagem é quem faz.</li>
+      <li><b>Sem pacote fechado</b>A proposta nasce do seu problema.</li>
+      <li><b>Código próprio</b>Nada de modelo pronto com o seu logo por cima.</li>
+    </ul>
+    <p class="perfil">Perfil técnico de cada um <span aria-hidden="true">→</span> <span class="pendente">em breve</span></p>
+  </div>
+  <div class="socios">
+    <figure class="socio">
+      <div class="foto" aria-hidden="true">foto</div>
+      <figcaption><b>Nome a definir</b>Desenvolvimento</figcaption>
+    </figure>
+    <figure class="socio">
+      <div class="foto" aria-hidden="true">foto</div>
+      <figcaption><b>Nome a definir</b><span class="pendente">função a definir</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ CONTATO: a ordem de produção em tamanho real ============ -->
+<section class="contato" id="contato">
+  <div class="contato-texto">
+    <p class="rotulo"><b>04</b> Contato</p>
+    <h2>Abra a sua ordem de produção.</h2>
+    <p class="lead">Conte o que você precisa. A proposta volta com escopo, prazo e valor, antes de qualquer compromisso.</p>
+    <dl class="canais">
+      <div><dt>WhatsApp</dt><dd class="pendente">em definição</dd></div>
+      <div><dt>E-mail</dt><dd class="pendente">em definição</dd></div>
+    </dl>
+    <p class="vaga">Vaga ou freela? Fale direto pelo LinkedIn: <span class="pendente">em definição</span></p>
+  </div>
+
+  <form class="ordem" id="ordem" novalidate>
+    <header>
+      <span>Ordem de produção</span>
+      <span>Nº 0003</span>
+    </header>
+    <label class="campo">
+      <span>Seu negócio</span>
+      <input name="negocio" id="ordem-negocio" type="text" maxlength="40" autocomplete="organization">
+    </label>
+    <label class="campo">
+      <span>Seu nome</span>
+      <input name="nome" type="text" autocomplete="name" required>
+    </label>
+    <label class="campo">
+      <span>E-mail ou WhatsApp</span>
+      <input name="contato" type="text" autocomplete="email" required>
+    </label>
+    <fieldset class="campo">
+      <legend>O que você precisa</legend>
+      <div class="opcoes">
+        <label><input type="radio" name="servico" value="Desenvolvimento"><span>Desenvolvimento</span></label>
+        <label><input type="radio" name="servico" value="Soluções tecnológicas"><span>Soluções tecnológicas</span></label>
+        <label><input type="radio" name="servico" value="Tráfego pago"><span>Tráfego pago</span></label>
+        <label><input type="radio" name="servico" value="Ainda não sei" checked><span>Ainda não sei</span></label>
+      </div>
+    </fieldset>
+    <label class="campo">
+      <span>Mensagem</span>
+      <textarea name="mensagem" rows="3"></textarea>
+    </label>
+    <div class="ordem-pe">
+      <button class="btn btn-tinta" type="submit">Enviar ordem <span aria-hidden="true">→</span></button>
+      <p class="aviso" id="ordem-aviso" role="status"></p>
+    </div>
+  </form>
+</section>
+
+</main>
+
+<!-- ============ RODAPÉ: a fábrica inteira, com as luzes baixas ============ -->
+<footer class="rodape">
+  <div class="fabrica fabrica-rodape" data-video="midia/fabrica/l0.mp4" aria-hidden="true">
+    <img src="midia/fabrica/m0-960.jpg" width="960" height="540" alt="" loading="lazy">
+  </div>
+  <div class="rodape-linha">
+    <span><i class="ponto"></i>Linha funcionando · 2 no ar</span>
+    <span>Hora local <b data-hora>--:--</b></span>
+    <span class="rodape-links">GitHub · LinkedIn · Perfil técnico <i class="pendente">em breve</i></span>
+    <span>© 2026 Overxia Solutions</span>
+  </div>
+  <p class="letreiro" aria-hidden="true">OVER<i>X</i>IA</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
