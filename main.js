@@ -145,7 +145,9 @@
       e.target.classList.add(e.target.classList.contains('cortina') ? 'aberta' : 'vista');
       chega.unobserve(e.target);
     }), { rootMargin: '0px 0px -12% 0px' });
-    $$('[data-palavras]:not(h1), .cortina, .letreiro').forEach(e => chega.observe(e));
+    $$('[data-palavras]:not(h1), .cortina').forEach(e => chega.observe(e));
+    const fimDaPagina = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vista'); fimDaPagina.unobserve(e.target); } }), { threshold: .2 });
+    fimDaPagina.observe(letreiro);
     requestAnimationFrame(() => setTimeout(() => $('h1[data-palavras]').classList.add('vista'), 200));
 
     // barra de progresso da leitura
@@ -228,7 +230,9 @@
       const t = telas(c);
       const tc = gsap.timeline({
         defaults: { ease: 'power2.inOut' },
-        scrollTrigger: { trigger: c, start: 'top top', end: () => '+=' + Math.round(innerHeight * (t.n * .75)), pin: true, scrub: .3, invalidateOnRefresh: true, onUpdate: t.marca },
+        // o caminho e as barrinhas seguem a animação (inclusive a suavização do scrub), não só o scroll
+        onUpdate: t.marca,
+        scrollTrigger: { trigger: c, start: 'top top', end: () => '+=' + Math.round(innerHeight * (t.n * .75)), pin: true, scrub: .3, invalidateOnRefresh: true },
       });
       t.passos(tc, .3);
       tc.to({}, { duration: .5 });
@@ -236,16 +240,31 @@
     return () => document.documentElement.classList.remove('cinema');
   });
 
-  /* ---------- Celular e tablet: a tela desce igual; as telas rolam enquanto o navegador passa ---------- */
+  /* ---------- Celular e tablet: a tela desce igual, e as telas do site passam sozinhas ----------
+     No celular o dedo rola rápido demais para as telas seguirem o scroll. Aqui elas passam
+     por tempo, como stories: 2,6 s em cada uma, só enquanto o projeto está na tela.
+     Tocar no navegador pula para a próxima. */
   mm.add('(max-width: 959px)', () => {
+    const paradas = [];
     $$('.caso').forEach(c => {
       chegada(c);
       const t = telas(c);
-      const tc = gsap.timeline({
-        scrollTrigger: { trigger: $('.janela', c), start: 'top 70%', end: 'bottom 20%', scrub: .3, onUpdate: t.marca },
+      const tl = gsap.timeline({ repeat: -1, paused: true, onUpdate: t.marca });
+      for (let i = 1; i < t.n; i++) tl.to(t.faixa, { yPercent: -100 * i / t.n, duration: .9, ease: 'power2.inOut' }, '+=2.6');
+      // da última volta para a primeira com um esmaecer (em vez de rebobinar as telas)
+      tl.to(t.faixa, { autoAlpha: 0, duration: .35, ease: 'power1.in' }, '+=2.6')
+        .set(t.faixa, { yPercent: 0 })
+        .to(t.faixa, { autoAlpha: 1, duration: .45, ease: 'power1.out' });
+      paradas.push(tl);
+      const olho = new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? tl.play() : tl.pause())), { threshold: .45 });
+      olho.observe($('.navegador', c));
+      $('.janela', c).addEventListener('click', () => {
+        // pula para a próxima tela sem esperar
+        const prox = tl.getChildren(false, true, false).find(tw => tw.startTime() - .3 > tl.time());
+        tl.time(prox ? Math.max(0, prox.startTime() - .01) : 0);
       });
-      t.passos(tc, 0);
     });
+    return () => paradas.forEach(tl => tl.kill());
   });
 
   /* Links internos e o "Abrir ordem" da abertura */

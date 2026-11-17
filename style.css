@@ -74,7 +74,7 @@ h1 em { font-style: normal; color: var(--luz); }
   border-bottom: 1px solid transparent;
 }
 .topo.solida { background: rgba(5, 6, 6, .96); border-bottom-color: var(--fio); }
-.marca { display: grid; text-decoration: none; line-height: 1; margin-right: auto; }
+.marca { display: grid; align-content: center; min-height: 44px; text-decoration: none; line-height: 1; margin-right: auto; }
 .marca-nome { font-family: var(--titulo); font-weight: 800; font-size: 1.15rem; letter-spacing: .06em; }
 .marca-nome i, .letreiro i { font-style: normal; color: var(--luz); }
 .marca-sub { font-family: var(--mono); font-size: .55rem; letter-spacing: .42em; text-transform: uppercase; color: var(--suave); margin-top: 3px; }
@@ -214,8 +214,14 @@ h1 em { font-style: normal; color: var(--luz); }
 
 @media (max-width: 759px) {
   .tecnologias dd { grid-template-columns: minmax(0, 1fr); }
-  .fatos { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .celular { width: 26%; right: 2%; bottom: 8px; border-width: 3px; border-radius: 14px; }
+  /* ficha em lista: rótulo à esquerda, valor à direita */
+  .fatos { grid-template-columns: minmax(0, 1fr); gap: 0; border-top: 1px solid var(--fio); }
+  .fatos div { display: grid; grid-template-columns: 6.6rem minmax(0, 1fr); gap: .8rem; align-items: baseline; padding: 9px 0; border-bottom: 1px dashed rgba(244, 242, 237, .1); }
+  .caso-info { gap: 1rem; }
+  .caso-info h3 { font-size: 2.6rem; }
+  .janela { cursor: pointer; }
+  /* o celular desenhado fica menor e encostado no canto, cobrindo menos a tela do site */
+  .celular { width: 21%; right: -1%; bottom: 2px; border-width: 3px; border-radius: 12px; }
   .barra { height: 32px; font-size: .62rem; }
   .ok { display: none; }
 }

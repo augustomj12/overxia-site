@@ -17,8 +17,9 @@ Site da Overxia Solutions: sites, sistemas e aplicativos feitos sob medida. Tamb
 | `midia/projetos/` | Capturas dos projetos (4 telas + celular de cada um) |
 | `_headers` | Cabeçalhos de segurança e de cache usados pelo Cloudflare Pages |
 | `ADICIONAR-PROJETO.md` | **Manual para subir um projeto novo no mesmo padrão** |
+| `validar.js` | Confere os projetos e acerta as contagens (`node validar.js --corrigir`). O Cloudflare roda antes de cada publicação |
 
-Site estático: HTML, CSS e JavaScript, com GSAP, ScrollTrigger e Lenis carregados por CDN. Não tem etapa de build.
+Site estático: HTML, CSS e JavaScript, com GSAP, ScrollTrigger e Lenis carregados por CDN. Não tem build: a única etapa antes de publicar é o `validar.js`.
 
 ## Ver no computador
 
@@ -35,7 +36,7 @@ O site é publicado pelo **Cloudflare Pages**, ligado a este repositório no Git
 
 Configuração no Cloudflare Pages:
 - Framework preset: **None**
-- Build command: **(vazio)**
+- Build command: **node validar.js** (se o validador achar erro, a publicação para e o site continua na versão anterior)
 - Build output directory: **/** (a raiz do repositório)
 
 ## Regras do conteúdo

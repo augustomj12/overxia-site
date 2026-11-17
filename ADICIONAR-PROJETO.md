@@ -99,28 +99,31 @@ O que ainda não está confirmado:
 <dd><b>Banco, login e pagamento</b><span class="pendente">a confirmar</span></dd>
 ```
 
-## 3. Atualize os números que contam projetos
+## 3. Rode o validador (ele acerta os números sozinho)
 
-Quando entra um projeto, **cinco lugares** mudam juntos:
+Na pasta do site, no terminal:
+```bash
+node validar.js --corrigir
+```
 
-| Onde | O que mudar |
-|---|---|
-| Cartão do fim dos projetos: `Lote 03 · destino:` | próximo número livre (com 3 projetos, vira `Lote 04`) |
-| Frase dos projetos: "Dois endereços no ar." | a quantidade, por extenso |
-| Descrição para o Google (`<meta name="description">`): "Projetos no ar: RITMO e Dedelimp." | o nome do projeto novo na lista |
-| Rodapé: "Linha funcionando · 2 no ar" | a quantidade |
-| Este manual e o `ROTEIRO.md` | anotar o projeto novo |
+Ele faz duas coisas:
+- **acerta sozinho os números que dependem da quantidade de projetos**: o "Lote" do cartão do fim, a frase "Dois endereços no ar.", o "2 no ar" do rodapé e a lista "Projetos no ar: …" da descrição para o Google;
+- **confere o projeto novo** e, se tiver algo fora do padrão, diz exatamente o que corrigir: classe e número do caso, `invertido` nos pares, id, nome, domínio igual na barra e no link, quantidade de telas igual à de nomes e de barrinhas, tamanho exato das imagens (1440 × 900 e 780 × 1688), peso das imagens, `alt`, "Lote", tecnologias no formato certo, "Quem fez" e arquivos que não existem.
+
+Rode de novo até aparecer **"Tudo certo. Pode publicar."**
+
+> **O Cloudflare roda o mesmo validador antes de cada publicação.** Se ele achar um erro, a publicação para e o site no ar continua na versão anterior. Nada quebrado chega ao ar. O motivo aparece no Cloudflare: Workers & Pages → overxia-site → Deployments → a publicação com falha → "View details".
 
 Nada no `main.js` precisa mudar: ele encontra sozinho os blocos com a classe `caso`.
 
 ## 4. Confira antes de subir
 
 1. Dê dois cliques em `index.html` e role a página inteira.
-   - O navegador do projeto fica preso e passa pelas 4 telas; o caminho na barra muda junto.
-   - O celular aparece ao lado.
+   - **Computador:** o projeto fica preso e passa pelas telas conforme a rolagem; o caminho na barra muda junto.
+   - O celular desenhado aparece ao lado.
    - Nenhum texto cortado, nada saindo da tela.
-2. Celular: `F12`, `Ctrl + Shift + M`, tamanho **375 × 812**, recarregue e role tudo de novo. Não pode aparecer rolagem para o lado.
-3. Suba as mudanças (seção 5). O Cloudflare publica sozinho em um ou dois minutos. Abra o endereço do site e role tudo de novo para conferir no ar.
+2. **Celular:** `F12`, `Ctrl + Shift + M`, tamanho **375 × 812**, recarregue e role tudo de novo. No celular as telas do projeto **passam sozinhas** (como stories, 2,6 s cada) enquanto ele está na tela, e um toque pula para a próxima. Não pode aparecer rolagem para o lado.
+3. Suba as mudanças (seção 5). O Cloudflare valida e publica sozinho em cerca de 1 minuto. Abra o endereço do site e confira no ar.
 
 ## 5. Ao registrar a mudança (commit)
 
