@@ -90,7 +90,70 @@
   const entra = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('visto'); entra.unobserve(e.target); }
   }), { rootMargin: '0px 0px -10% 0px' });
-  $$('.servicos .cabeca, .frente, .quem-texto, .socios, .contato-texto, .proximo').forEach(e => { e.classList.add('ver'); entra.observe(e); });
+  $$('.servicos .cabeca > :not(h2), .frente, .quem-texto > :not(h2), .socios, .contato-texto > :not(h2), .proximo, .capitulo .rotulo, .capitulo .lead').forEach(e => { e.classList.add('ver'); entra.observe(e); });
+
+  /* ---------- Transições (código próprio, leve; tudo por tempo, uma vez) ---------- */
+  if (!RM) {
+    // títulos: cada palavra vira uma fresta de onde ela sobe
+    let ordemPalavra = 0;
+    const quebra = no => [...no.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(p => {
+          if (!p) return;
+          if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(' ')); return; }
+          const w = document.createElement('span'), d = document.createElement('span');
+          w.className = 'p'; d.className = 'pi'; d.textContent = p; d.style.setProperty('--i', ordemPalavra++);
+          w.appendChild(d); frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1 && n.tagName !== 'BR') quebra(n);
+    });
+    $$('[data-palavras]').forEach(t => { ordemPalavra = 0; quebra(t); });
+
+    // letreiro: uma letra por vez
+    const letreiro = $('.letreiro');
+    let k = 0;
+    const letras = no => [...no.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        [...n.textContent].forEach(ch => { const s = document.createElement('span'); s.className = 'l'; s.textContent = ch; s.style.setProperty('--i', k++); frag.appendChild(s); });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) letras(n);
+    });
+    letras(letreiro);
+
+    // botões: o texto rola no hover
+    $$('.btn').forEach(b => {
+      const t = [...b.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+      if (!t) return;
+      const txt = t.textContent.trim();
+      const r = document.createElement('span');
+      r.className = 'rolo';
+      r.innerHTML = '<span></span><span aria-hidden="true"></span>';
+      r.children[0].textContent = txt; r.children[1].textContent = txt;
+      t.replaceWith(r, document.createTextNode(' '));
+    });
+
+    // seções claras abrem como um cartão
+    $$('.servicos, .contato').forEach(s => s.classList.add('cortina'));
+
+    // quando cada coisa chega na tela
+    const chega = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add(e.target.classList.contains('cortina') ? 'aberta' : 'vista');
+      chega.unobserve(e.target);
+    }), { rootMargin: '0px 0px -12% 0px' });
+    $$('[data-palavras]:not(h1), .cortina, .letreiro').forEach(e => chega.observe(e));
+    requestAnimationFrame(() => setTimeout(() => $('h1[data-palavras]').classList.add('vista'), 200));
+
+    // barra de progresso da leitura
+    const barra = $('.progresso');
+    let pedidoBarra = false;
+    const mede = () => { pedidoBarra = false; const max = document.documentElement.scrollHeight - innerHeight; barra.style.transform = 'scaleX(' + (max > 0 ? (scrollY / max).toFixed(4) : 0) + ')'; };
+    addEventListener('scroll', () => { if (!pedidoBarra) { pedidoBarra = true; requestAnimationFrame(mede); } }, { passive: true });
+    mede();
+  }
 
   /* Sem GSAP ou com movimento reduzido: a página já está completa */
   const rolarNativo = alvo => window.scrollTo({ top: alvo ? alvo.getBoundingClientRect().top + scrollY - 64 : 0, behavior: RM ? 'auto' : 'smooth' });
@@ -142,7 +205,7 @@
 
   /* ---------- Abertura: entra uma vez, por tempo (não depende do scroll) ---------- */
   gsap.fromTo('.cena .fabrica', { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, duration: 1.8, ease: 'power3.out' });
-  gsap.fromTo('.abertura > *', { y: 26, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .9, ease: 'power3.out', stagger: .08, delay: .25 });
+  gsap.fromTo('.abertura > :not(h1)', { y: 26, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .9, ease: 'power3.out', stagger: .08, delay: .25 });
 
   /* ---------- A tela desce até o lugar ----------
      Quando o projeto chega, o navegador desce de cima, inclinado como uma tela sendo
@@ -155,7 +218,6 @@
     gsap.fromTo($('.celular', c), { y: 70, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, ease: 'power3.out', delay: .45, scrollTrigger: st });
     gsap.fromTo($$('.caso-info > *', c), { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .7, ease: 'power2.out', stagger: .06, delay: .25, scrollTrigger: st });
   }
-  gsap.fromTo('.capitulo > *', { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .9, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: '.capitulo', start: 'top 80%', once: true } });
 
   /* ---------- Computador: cada projeto fica preso enquanto as telas passam ---------- */
   mm.add('(min-width: 960px)', () => {
