@@ -17,7 +17,7 @@
   function loopSuave(caixa) {
     const novo = () => {
       const v = document.createElement('video');
-      v.muted = true; v.playsInline = true; v.preload = 'auto';
+      v.muted = true; v.playsInline = true; v.preload = 'none';
       v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
       v.src = caixa.dataset.video;
       caixa.appendChild(v);
@@ -27,7 +27,7 @@
     vs[1].style.opacity = 0;
     const tocar = v => { const p = v.play(); if (p) p.catch(() => {}); };
     // toca só se estiver na tela e não estiver 'segurado' (apagado atrás de outro conteúdo)
-    let ativo = 0, trocando = false, ligado = false, visivel = false, segurado = false;
+    let ativo = 0, trocando = false, ligado = false, visivel = false, segurado = false, carregado = false;
     const aplica = () => {
       const on = visivel && !segurado;
       if (on === ligado) return;
@@ -36,7 +36,8 @@
     };
     return {
       caixa,
-      liga(on) { visivel = on; aplica(); },
+      // só baixa o vídeo quando ele chega perto da tela (o do rodapé não pesa na abertura)
+      liga(on) { if (on && !carregado) { carregado = true; vs.forEach(v => { v.preload = 'auto'; v.load(); }); } visivel = on; aplica(); },
       segura(on) { segurado = on; aplica(); },
       tick() {
         if (!ligado || trocando) return;
