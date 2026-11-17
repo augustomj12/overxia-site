@@ -42,7 +42,7 @@ h1 em { font-style: normal; color: var(--luz); }
 .rotulo { font-family: var(--mono); font-size: .72rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--suave); }
 .rotulo b { color: var(--luz); font-weight: 600; margin-right: .6em; }
 .rotulo .x { font-style: normal; color: var(--luz); margin-right: .5em; font-weight: 600; }
-.lead { font-size: clamp(1rem, 1.2vw, 1.12rem); color: var(--suave); max-width: 34rem; }
+.lead { font-size: clamp(1rem, 1.2vw, 1.12rem); color: var(--suave); max-width: 34rem; text-wrap: pretty; }
 .pendente { color: var(--ambar); }
 
 .itens { display: grid; gap: .45rem; font-family: var(--mono); font-size: .8rem; }
@@ -103,7 +103,7 @@ h1 em { font-style: normal; color: var(--luz); }
    direita e o texto no canto livre à esquerda (só CSS, sem scroll preso). */
 .cena { position: relative; background: var(--palco); overflow-x: clip; }
 .palco { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
-.cena .fabrica { width: 122%; margin: calc(var(--topo) - 6px) 0 0 -11%; }
+.cena .fabrica { width: 100%; margin: calc(var(--topo) + 8px) 0 0; }
 .abertura { display: grid; gap: 1.1rem; padding: 4px var(--margem) 64px; }
 .abertura .lead { max-width: 25rem; }
 .rolar { display: none; }
@@ -112,7 +112,12 @@ h1 em { font-style: normal; color: var(--luz); }
 @media (min-width: 960px) {
   .cena { height: 100vh; height: 100svh; min-height: 640px; }
   .cena .palco { display: block; height: 100%; overflow: hidden; }
-  .cena .fabrica { position: absolute; margin: 0; right: -4vw; bottom: -6vh; width: min(80vw, 146svh); }
+  /* menor e centrada na altura (a pedido do Augusto, para o vídeo aparecer menos) */
+  .cena .fabrica {
+    --lf: min(52vw, 92svh);
+    position: absolute; margin: 0; right: max(16px, 3vw); width: var(--lf);
+    top: calc(50% - var(--lf) * .28 + 4vh);
+  }
   /* véu escuro à esquerda: o texto da abertura nunca disputa com a maquete */
   .cena .palco::after {
     content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
